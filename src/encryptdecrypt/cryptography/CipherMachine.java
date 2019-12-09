@@ -1,7 +1,7 @@
 package encryptdecrypt.cryptography;
 
 import encryptdecrypt.IOHandlers.ArgumentHandler;
-import encryptdecrypt.IOHandlers.OutPutHandler;
+import encryptdecrypt.IOHandlers.outPutHandler.OutPutHandler;
 import encryptdecrypt.cryptography.decryptionAlgorithms.ShiftDecryptionAlgorithm;
 import encryptdecrypt.cryptography.decryptionAlgorithms.UnicodeDecryptionAlgorithm;
 import encryptdecrypt.cryptography.encryptionAlgorithms.ShiftEncryptionAlgorithm;
@@ -10,9 +10,22 @@ import encryptdecrypt.exceptions.WrongArgumentException;
 import encryptdecrypt.plainText.PlainTextHandler;
 
 public class CipherMachine {
+    private CryptographAlgorithm cryptographAlgorithm;
     private ArgumentHandler argHandler;
     private PlainTextHandler plainTextHandler;
-    private CryptographAlgorithm cryptographAlgorithm;
+    private OutPutHandler outPutHandler;
+
+    public CipherMachine(ArgumentHandler argumentHandler) {
+        this.argHandler = argumentHandler;
+        setPlainTextHandler();
+
+        outPutHandler = new OutPutHandler(argumentHandler);
+    }
+
+    private void setPlainTextHandler() {
+        plainTextHandler = new PlainTextHandler(argHandler.getArgs());
+        plainTextHandler.setPlainTextMethod();
+    }
 
     private void setCryptographAlgorithm() throws WrongArgumentException {
         String algorithm = argHandler.getAlgorithm();
@@ -37,17 +50,6 @@ public class CipherMachine {
         }
     }
 
-    public CipherMachine(ArgumentHandler argumentHandler) {
-        this.argHandler = argumentHandler;
-        setPlainTextHandler();
-    }
-
-    public void doCryptography() {
-        String plainText = plainTextHandler.getPlainText();
-        String cipherText = cipherText(plainText);
-        OutPutCipherText(cipherText);
-    }
-
     private String cipherText(String plainText) {
         try {
             setCryptographAlgorithm();
@@ -60,18 +62,9 @@ public class CipherMachine {
 
     }
 
-    private void setPlainTextHandler() {
-        plainTextHandler = new PlainTextHandler(argHandler.getArgs());
-        plainTextHandler.setPlainTextMethod();
-    }
-
-    //TODO make OutPutHandler a Strategy Pattern
-    private void OutPutCipherText(String cipherText) {
-        String destination = argHandler.getOutPutFileName();
-        if (!destination.equals("")) {
-            OutPutHandler.writeToFile(destination, cipherText);
-        } else {
-            OutPutHandler.writeToConsole(cipherText);
-        }
+    public void doCryptography() {
+        String plainText = plainTextHandler.getPlainText();
+        String cipherText = cipherText(plainText);
+        outPutHandler.outPutCipherText(cipherText);
     }
 }
