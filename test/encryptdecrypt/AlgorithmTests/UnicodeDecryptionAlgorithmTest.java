@@ -1,20 +1,20 @@
-package AlgorithmTests;
+package encryptdecrypt.AlgorithmTests;
 
 import encryptdecrypt.cryptography.CryptographAlgorithm;
-import encryptdecrypt.cryptography.encryptionAlgorithms.ShiftEncryptionAlgorithm;
+import encryptdecrypt.cryptography.decryptionAlgorithms.UnicodeDecryptionAlgorithm;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ShiftEncryptionAlgorithmTest {
-    private CryptographAlgorithm cryptographAlgorithm = new ShiftEncryptionAlgorithm();
+class UnicodeDecryptionAlgorithmTest {
+    private CryptographAlgorithm cryptographAlgorithm = new UnicodeDecryptionAlgorithm();
 
     @Test
-    void testShiftEncryptionAlgorithm() {
+    void testShiftDecryptionAlgorithm() {
         int key = 5;
-        String encryptedText = "Welcome to hyperskill!";
+        String encryptedText = "\\jqhtrj%yt%m~ujwxpnqq&";
         String actual = cryptographAlgorithm.cryptograph(encryptedText, key);
-        assertEquals("Bjqhtrj yt mdujwxpnqq!", actual);
+        assertEquals("Welcome to hyperskill!", actual);
     }
 
     @Test

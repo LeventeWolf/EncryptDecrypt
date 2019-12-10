@@ -1,4 +1,4 @@
-package encryptdecrypt.plainText;
+package encryptdecrypt.IOHandlers.plainText;
 
 import encryptdecrypt.IOHandlers.ArgumentHandler;
 

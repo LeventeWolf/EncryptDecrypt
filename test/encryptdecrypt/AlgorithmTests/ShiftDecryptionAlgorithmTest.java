@@ -1,4 +1,4 @@
-package AlgorithmTests;
+package encryptdecrypt.AlgorithmTests;
 
 import encryptdecrypt.cryptography.CryptographAlgorithm;
 import encryptdecrypt.cryptography.decryptionAlgorithms.ShiftDecryptionAlgorithm;

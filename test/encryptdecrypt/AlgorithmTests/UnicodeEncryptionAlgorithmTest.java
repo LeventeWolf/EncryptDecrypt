@@ -1,8 +1,7 @@
-package AlgorithmTests;
+package encryptdecrypt.AlgorithmTests;
 
 import encryptdecrypt.cryptography.CryptographAlgorithm;
 import encryptdecrypt.cryptography.encryptionAlgorithms.UnicodeEncryptionAlgorithm;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

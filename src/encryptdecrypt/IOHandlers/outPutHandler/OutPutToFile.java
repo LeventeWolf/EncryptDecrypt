@@ -10,6 +10,7 @@ public class OutPutToFile implements OutPutMethod {
         this.fileName = fileName;
     }
 
+    //TODO outPut file to resource folder
     public void outPut(String cipherText) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {
             fileWriter.write(cipherText);
