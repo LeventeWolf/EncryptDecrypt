@@ -8,10 +8,14 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class PlainTextFromFile implements PlainTextMethod {
-    private static String getCipherTextFromFile(String[] args) {
+    @Override
+    public String getPlainText(String[] args) {
+        return getCipherTextFromFile(args);
+    }
+
+    private String getCipherTextFromFile(String[] args) {
         ArgumentHandler argHandler = new ArgumentHandler(args);
-        PlainTextFromFile main = new PlainTextFromFile();
-        File file = main.getFileFromResources(argHandler.getInputFileName());
+        File file = getFileFromResources(argHandler.getInputFileName());
 
         String cipherText = "";
         try (Scanner sc = new Scanner(file)) {
@@ -21,11 +25,6 @@ public class PlainTextFromFile implements PlainTextMethod {
         }
 
         return cipherText;
-    }
-
-    @Override
-    public String getPlainText(String[] args) {
-        return getCipherTextFromFile(args);
     }
 
     private File getFileFromResources(String fileName) {
