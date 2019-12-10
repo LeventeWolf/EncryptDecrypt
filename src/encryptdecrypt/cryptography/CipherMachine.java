@@ -7,7 +7,7 @@ import encryptdecrypt.cryptography.decryptionAlgorithms.UnicodeDecryptionAlgorit
 import encryptdecrypt.cryptography.encryptionAlgorithms.ShiftEncryptionAlgorithm;
 import encryptdecrypt.cryptography.encryptionAlgorithms.UnicodeEncryptionAlgorithm;
 import encryptdecrypt.exceptions.WrongArgumentException;
-import encryptdecrypt.plainText.PlainTextHandler;
+import encryptdecrypt.IOHandlers.plainText.PlainTextHandler;
 
 public class CipherMachine {
     private CryptographAlgorithm cryptographAlgorithm;

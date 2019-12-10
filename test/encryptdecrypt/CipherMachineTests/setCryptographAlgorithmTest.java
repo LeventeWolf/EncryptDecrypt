@@ -1,8 +1,7 @@
-package CipherMachineTests;
+package encryptdecrypt.CipherMachineTests;
 
 import encryptdecrypt.IOHandlers.ArgumentHandler;
 import encryptdecrypt.cryptography.CipherMachine;
-import encryptdecrypt.cryptography.CryptographAlgorithm;
 import encryptdecrypt.cryptography.decryptionAlgorithms.ShiftDecryptionAlgorithm;
 import encryptdecrypt.cryptography.decryptionAlgorithms.UnicodeDecryptionAlgorithm;
 import encryptdecrypt.cryptography.encryptionAlgorithms.ShiftEncryptionAlgorithm;
