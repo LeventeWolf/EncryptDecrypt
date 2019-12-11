@@ -4,25 +4,24 @@ import encryptdecrypt.IOHandlers.ArgumentHandler;
 
 public class PlainTextHandler {
     private PlainTextMethod plainTextMethod;
-    private String[] args;
+    private ArgumentHandler argHandler;
 
-    public PlainTextHandler(String[] args) {
-        this.args = args;
+    public PlainTextHandler(ArgumentHandler argHandler) {
+        this.argHandler = argHandler;
     }
 
     public String getPlainText() {
-        return plainTextMethod.getPlainText(args);
+        return plainTextMethod.getPlainText();
     }
 
     public void setPlainTextMethod() {
-        ArgumentHandler argHandler = new ArgumentHandler(args);
         String in = argHandler.getInputFileName();
         String data = argHandler.getData();
 
         if (!data.equals("")) {
-            plainTextMethod = new PlainTextFromConsole();
+            plainTextMethod = new PlainTextFromConsole(argHandler);
         } else if (!in.equals("")) {
-            plainTextMethod = new PlainTextFromFile();
+            plainTextMethod = new PlainTextFromFile(argHandler);
         } else {
             //TODO throw exception
         }

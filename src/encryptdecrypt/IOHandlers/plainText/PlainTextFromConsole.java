@@ -2,11 +2,14 @@ package encryptdecrypt.IOHandlers.plainText;
 
 import encryptdecrypt.IOHandlers.ArgumentHandler;
 
-public class PlainTextFromConsole implements PlainTextMethod {
+public class PlainTextFromConsole extends PlainTextMethod {
+    PlainTextFromConsole(ArgumentHandler argumentHandler) {
+        super(argumentHandler);
+    }
 
     @Override
-    public String getPlainText(String[] args) {
-        ArgumentHandler argHandler = new ArgumentHandler(args);
+    public String getPlainText() {
+        ArgumentHandler argHandler = argumentHandler;
         return argHandler.getData();
     }
 }
