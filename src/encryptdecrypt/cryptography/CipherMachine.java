@@ -23,7 +23,7 @@ public class CipherMachine {
     }
 
     private void setPlainTextHandler() {
-        plainTextHandler = new PlainTextHandler(argHandler.getArgs());
+        plainTextHandler = new PlainTextHandler(argHandler);
         plainTextHandler.setPlainTextMethod();
     }
 

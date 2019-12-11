@@ -1,7 +1,13 @@
 package encryptdecrypt.IOHandlers.plainText;
 
-public interface PlainTextMethod {
-    //TODO share common ArgumentHandler for Concrete classes
+import encryptdecrypt.IOHandlers.ArgumentHandler;
 
-    String getPlainText(String[] args);
+abstract class PlainTextMethod {
+    ArgumentHandler argumentHandler;
+
+    PlainTextMethod(ArgumentHandler argumentHandler) {
+        this.argumentHandler = argumentHandler;
+    }
+
+    abstract String getPlainText();
 }

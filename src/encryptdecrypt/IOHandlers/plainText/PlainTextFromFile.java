@@ -6,14 +6,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class PlainTextFromFile implements PlainTextMethod {
-    @Override
-    public String getPlainText(String[] args) {
-        return getPlainTextFromFile(args);
+public class PlainTextFromFile extends PlainTextMethod {
+    PlainTextFromFile(ArgumentHandler argumentHandler) {
+        super(argumentHandler);
     }
 
-    private String getPlainTextFromFile(String[] args) {
-        ArgumentHandler argHandler = new ArgumentHandler(args);
+    @Override
+    public String getPlainText() {
+        return getPlainTextFromFile();
+    }
+
+    private String getPlainTextFromFile() {
+        ArgumentHandler argHandler = argumentHandler;
         File file = new File("src\\resource\\" + argHandler.getInputFileName());
 
         String cipherText = "";
