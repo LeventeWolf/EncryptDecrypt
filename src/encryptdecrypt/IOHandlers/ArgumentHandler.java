@@ -1,6 +1,8 @@
 package encryptdecrypt.IOHandlers;
 
 public class ArgumentHandler {
+    //TODO use a HashMap for arguments:
+    //key: -data value: "Welcome to hyperskill!
     private String[] args;
 
     public ArgumentHandler(String[] args) {
@@ -30,6 +32,41 @@ public class ArgumentHandler {
         return "enc";
     }
 
+    //TODO write unit test for getInPutMode
+    public String getInPutMode() {
+        boolean wasData = false;
+        boolean wasInPutFileName = false;
+
+        for (String arg : args) {
+            if (arg.equals("-data")) wasData = true;
+            else if (arg.equals("-in")) wasInPutFileName = true;
+        }
+        if (wasData) {
+            return "console";
+        } else if (wasInPutFileName) {
+            return "file";
+        } else {
+            //TODO: can throw ArgumentNullException
+            //Hyperskill implementation = return "";
+            return "";
+        }
+    }
+
+    //TODO write unit test for getOutPutMode
+    public String getOutPutMode() {
+        boolean wasOutPut = false;
+
+        for (String arg : args) {
+            if (arg.equals("-out")) {
+                wasOutPut = true;
+                break;
+            }
+        }
+
+        if (wasOutPut) return "file";
+        else return "console";
+    }
+
     public String getInputFileName() {
         for (int i = 0; i < args.length; i++)
             if (args[i].equals("-in"))
@@ -42,10 +79,6 @@ public class ArgumentHandler {
             if (args[i].equals("-out"))
                 return args[i + 1];
         return "";
-    }
-
-    public String[] getArgs() {
-        return args;
     }
 
     public String getAlgorithm() {
