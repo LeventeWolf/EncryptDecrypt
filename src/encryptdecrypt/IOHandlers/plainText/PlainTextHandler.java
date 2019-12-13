@@ -2,12 +2,18 @@ package encryptdecrypt.IOHandlers.plainText;
 
 import encryptdecrypt.IOHandlers.ArgumentHandler;
 
+import java.util.HashMap;
+
 public class PlainTextHandler {
+    HashMap<String, PlainTextMethod> map = new HashMap<>();
     private PlainTextMethod plainTextMethod;
     private ArgumentHandler argHandler;
 
+
     public PlainTextHandler(ArgumentHandler argHandler) {
         this.argHandler = argHandler;
+        setMap();
+        setPlainTextMethod();
     }
 
     public String getPlainText() {
@@ -15,16 +21,17 @@ public class PlainTextHandler {
     }
 
     public void setPlainTextMethod() {
-        String in = argHandler.getInputFileName();
-        String data = argHandler.getData();
+        String inputMode = argHandler.getInPutMode();
 
-        if (!data.equals("")) {
-            plainTextMethod = new PlainTextFromConsole(argHandler);
-        } else if (!in.equals("")) {
-            plainTextMethod = new PlainTextFromFile(argHandler);
-        } else {
-            //TODO throw exception
-        }
+        plainTextMethod = map.get(inputMode);
     }
 
+    private void setMap() {
+        map.put("console", new PlainTextFromConsole(argHandler));
+        map.put("file", new PlainTextFromFile(argHandler));
+    }
+
+    public PlainTextMethod getPlainTextMethod() {
+        return plainTextMethod;
+    }
 }
