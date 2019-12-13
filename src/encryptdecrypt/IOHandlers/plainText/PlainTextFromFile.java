@@ -13,18 +13,13 @@ public class PlainTextFromFile extends PlainTextMethod {
 
     @Override
     public String getPlainText() {
-        return getPlainTextFromFile();
-    }
-
-    private String getPlainTextFromFile() {
-        ArgumentHandler argHandler = argumentHandler;
-        File file = new File("src\\resource\\" + argHandler.getInputFileName());
+        File file = new File("src\\resource\\" + argumentHandler.getInputFileName());
 
         String cipherText = "";
         try (Scanner sc = new Scanner(file)) {
             cipherText = sc.nextLine();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + argHandler.getInputFileName());
+            System.out.println("File not found: " + argumentHandler.getInputFileName());
         }
 
         return cipherText;

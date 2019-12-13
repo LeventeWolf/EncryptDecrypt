@@ -9,7 +9,6 @@ public class PlainTextFromConsole extends PlainTextMethod {
 
     @Override
     public String getPlainText() {
-        ArgumentHandler argHandler = argumentHandler;
-        return argHandler.getData();
+        return argumentHandler.getData();
     }
 }
