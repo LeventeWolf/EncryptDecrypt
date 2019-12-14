@@ -1,23 +1,26 @@
 package encryptdecrypt.cryptography;
 
 import encryptdecrypt.IOHandlers.ArgumentHandler;
-import encryptdecrypt.IOHandlers.outPutHandler.OutPutHandler;
+import encryptdecrypt.IOHandlers.outPut.OutPutHandler;
 import encryptdecrypt.cryptography.decryptionAlgorithms.ShiftDecryptionAlgorithm;
 import encryptdecrypt.cryptography.decryptionAlgorithms.UnicodeDecryptionAlgorithm;
 import encryptdecrypt.cryptography.encryptionAlgorithms.ShiftEncryptionAlgorithm;
 import encryptdecrypt.cryptography.encryptionAlgorithms.UnicodeEncryptionAlgorithm;
-import encryptdecrypt.exceptions.WrongArgumentException;
 import encryptdecrypt.IOHandlers.plainText.PlainTextHandler;
+
+import java.util.HashMap;
 
 public class CipherMachine {
     private CryptographAlgorithm cryptographAlgorithm;
     private ArgumentHandler argHandler;
     private PlainTextHandler plainTextHandler;
     private OutPutHandler outPutHandler;
+    private HashMap<String, CryptographAlgorithm> algorithmMap = new HashMap<>();
 
     public CipherMachine(ArgumentHandler argumentHandler) {
         this.argHandler = argumentHandler;
         setPlainTextHandler();
+        setAlgorithmMap();
 
         outPutHandler = new OutPutHandler(argumentHandler);
     }
@@ -27,39 +30,23 @@ public class CipherMachine {
         plainTextHandler.setPlainTextMethod();
     }
 
-    private void setCryptographAlgorithm() throws WrongArgumentException {
-        String algorithm = argHandler.getAlgorithm();
+    private void setAlgorithmMap() {
+        algorithmMap.put("shiftenc", new ShiftEncryptionAlgorithm());
+        algorithmMap.put("shiftdec", new ShiftDecryptionAlgorithm());
+        algorithmMap.put("unicodeenc", new UnicodeEncryptionAlgorithm());
+        algorithmMap.put("unicodedec", new UnicodeDecryptionAlgorithm());
+    }
 
-        switch (argHandler.getMode()) {
-            case "enc":
-                switch (algorithm) {
-                    case "shift" -> cryptographAlgorithm = new ShiftEncryptionAlgorithm();
+    private void setCryptographAlgorithm() {
+        String algorithmMode = argHandler.getAlgorithm() + argHandler.getMode();
 
-                    case "unicode" -> cryptographAlgorithm = new UnicodeEncryptionAlgorithm();
-                }
-                break;
-            case "dec":
-                switch (algorithm) {
-                    case "shift" -> cryptographAlgorithm = new ShiftDecryptionAlgorithm();
-
-                    case "unicode" -> cryptographAlgorithm = new UnicodeDecryptionAlgorithm();
-                }
-                break;
-            default:
-                throw new WrongArgumentException("Invalid mode: " + argHandler.getMode());
-        }
+        cryptographAlgorithm = algorithmMap.get(algorithmMode);
     }
 
     private String cipherText(String plainText) {
-        try {
-            setCryptographAlgorithm();
-        } catch (WrongArgumentException e) {
-            System.out.println(e.getMessage());
-            return "";
-        }
+        setCryptographAlgorithm();
 
         return cryptographAlgorithm.cryptograph(plainText, argHandler.getKey());
-
     }
 
     public void doCryptography() {
